@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【サンプル】税理士法人オグシ会計事務所 | Webデザインリニューアル例</title>
+    <meta name="description" content="これは税理士事務所Webサイトのリニューアルサンプルページです。実際の事務所ではありません。">
+    
+    <style>
+        /* サンプル表示用の注意書きスタイル */
+        .sample-notice {
+            background: linear-gradient(45deg, #FF6B35, #F7931E);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10000;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        /* メインコンテンツを注意書き分下げる */
+        body {
+            margin: 0;
+            padding-top: 50px; /* 注意書きの高さ分 */
+            font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+            line-height: 1.8;
+            color: #2E2E2E;
+            background: #FFFFFF;
+        }
+
+        /* アースカラー黄緑系の色定義 */
+        :root {
+            --primary-green: #7CB342;
+            --primary-dark: #558B2F;
+            --primary-light: #9CCC65;
+            --accent-yellow: #FFA726;
+            --earth-beige: #F5F5DC;
+            --sage-green: #87A96B;
+            --text-primary: #2E2E2E;
+            --text-secondary: #555555;
+            --bg-secondary: #F9F9F7;
+            --bg-accent: #F0F4E8;
+        }
+
+        /* ヘッダー */
+        .header {
+            background: white;
+            border-bottom: 3px solid var(--primary-green);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 50px; /* 注意書きの下に固定 */
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-green);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-green);
+            border-bottom-color: var(--primary-green);
+        }
+
+        .contact-button {
+            background: var(--primary-green);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .contact-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* メインビジュアル */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-accent) 0%, var(--earth-beige) 100%);
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content h2 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-features {
+            list-style: none;
+            margin: 0 0 2.5rem 0;
+            padding: 0;
+        }
+
+        .hero-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .hero-features li::before {
+            content: '✓';
+            width: 24px;
+            height: 24px;
+            background: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .hero-image {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(126, 179, 66, 0.2);
+            text-align: center;
+        }
+
+        .hero-image h3 {
+            color: var(--primary-green);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .price-highlight {
+            background: var(--bg-accent);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-highlight .price {
+            font-size: 2rem;
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        .price-highlight .price-note {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1.5rem;
+        }
+
+        .badge {
+            text-align: center;
+        }
+
+        .badge-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        .badge-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* セクション共通 */
+        .section {
+            padding: 4rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* サービス */
+        .services {
+            background: var(--bg-secondary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .service-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .service-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .service-list li::before {
+            content: '•';
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* お問い合わせ */
+        .contact {
+            background: var(--bg-secondary);
+        }
+
+        .contact-content {
+            text-align: center;
+        }
+
+        .contact-content h2 {
+            font-size: 2.2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .contact-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-method {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .contact-method-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .contact-method h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .contact-method p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-method .sample-contact {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: default;
+        }
+
+        /* フッター */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sample-notice {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            body {
+                padding-top: 40px;
+            }
+
+            .header {
+                top: 40px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- サンプル表示の注意書き -->
+    <div class="sample-notice">
+        ⚠️ これはWebデザインのサンプルページです。実際の税理士事務所ではありません。デザインリニューアルの参考例としてご覧ください。
+    </div>
+
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">オ</div>
+                <div class="logo-text">
+                    <h1>オグシ会計事務所</h1>
+                    <p>西宮の身近な税理士（サンプル）</p>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#services">サービス</a></li>
+                    <li><a href="#contact">お問い合わせ</a></li>
+                </ul>
+            </nav>
+            <a href="#contact" class="contact-button">📞 相談予約</a>
+        </div>
+    </header>
+
+    <!-- メインビジュアル -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h2>西宮で信頼される<br>身近な税理士事務所</h2>
+                <p class="subtitle">中小企業経営者の良きパートナーとして、豊富な実務経験に基づき、親切・丁寧にサポートさせていただきます。些細なことでも結構です。お気軽にご相談ください。</p>
+                
+                <ul class="hero-features">
+                    <li>JR西宮駅から徒歩5分の便利な立地</li>
+                    <li>40年以上の地域密着実績</li>
+                    <li>月額20,000円からの明確料金</li>
+                    <li>夜間・土日相談も対応可能</li>
+                </ul>
+
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">
+                        📞 無料相談予約
+                    </a>
+                    <a href="#services" class="btn-secondary">サービス詳細</a>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <h3>🌱 お客様と共に成長</h3>
+                <div class="price-highlight">
+                    <div class="price">月額20,000円〜</div>
+                    <div class="price-note">会社設立支援・顧問契約</div>
+                </div>
+                <p>小規模スタートでも、大きく育った企業も数多くサポートしています</p>
+                
+                <div class="trust-badges">
+                    <div class="badge">
+                        <div class="badge-number">500+</div>
+                        <div class="badge-text">サポート企業</div>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-number">40年</div>
+                        <div class="badge-text">地域実績</div>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-number">100%</div>
+                        <div class="badge-text">地域密着</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- サービス紹介 -->
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>🍃 私たちのサービス</h2>
+                <p>企業の成長段階に応じて、きめ細やかなサポートをご提供いたします</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">🏢</div>
+                        <h3>会社設立支援</h3>
+                    </div>
+                    <p>会社設立時の熱い志やビジョン達成を月額20,000円から応援します。小規模スタートでも、大きく育った企業も数多くサポートしています。</p>
+                    <ul class="service-list">
+                        <li>設立手続きの完全代行</li>
+                        <li>事業計画書作成支援</li>
+                        <li>資金調達のアドバイス</li>
+                        <li>開業後の継続サポート</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">📊</div>
+                        <h3>決算・申告業務</h3>
+                    </div>
+                    <p>税務署に行っても、決算書の作り方の話はしてくれても実際に作成はしてくれません。決算書・申告書の作成は西宮の専門の税理士にお任せください。</p>
+                    <ul class="service-list">
+                        <li>法人税・所得税申告書作成</li>
+                        <li>消費税申告対応</li>
+                        <li>税務調査立会い</li>
+                        <li>節税対策のご提案</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">👨‍👩‍👧‍👦</div>
+                        <h3>相続税対策</h3>
+                    </div>
+                    <p>故人の大切な思いが込められた財産を、相続人様へ円満に引き継げるように、西宮のオグシ会計事務所がお手伝い致しますので、ご安心ください。</p>
+                    <ul class="service-list">
+                        <li>相続税申告書作成</li>
+                        <li>財産評価・調査</li>
+                        <li>相続税対策提案</li>
+                        <li>遺産分割協議支援</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせ -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>📞 お気軽にご相談ください</h2>
+                <p>ご提案内容を気に入っていただき、料金にご納得いただければご契約となります。<br>まずは西宮の税理士法人オグシ会計事務所までお気軽にお問い合わせください。</p>
+
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-method-icon">📞</div>
+                        <h3>お電話でのご相談</h3>
+                        <p>平日 9:00-18:00<br>夜間・土日も事前予約で対応</p>
+                        <span class="sample-contact">XXX-XXXX-XXXX（サンプル）</span>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon">📧</div>
+                        <h3>メールでのご相談</h3>
+                        <p>24時間受付<br>2営業日以内にご返信いたします</p>
+                        <span class="sample-contact">sample@example.com</span>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon">🏢</div>
+                        <h3>事務所での面談</h3>
+                        <p>JR西宮駅から徒歩5分<br>初回相談は無料です</p>
+                        <span class="sample-contact">面談予約（サンプル）</span>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-accent); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1rem;">🌱 まずは無料相談から</h3>
+                    <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">些細なことでも結構です。税務・会計のことなら何でもお気軽にご相談ください。</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn-primary" style="border: none; cursor: default;">📞 今すぐ電話（サンプル）</button>
+                        <button class="btn-secondary" style="border: 2px solid var(--primary-green); cursor: default;">📧 メール相談（サンプル）</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 【サンプル】税理士法人オグシ会計事務所 Webデザインリニューアル例 | これは実際の事務所ではありません</p>
+        </div>
+    </footer>
+
+    <script>
+        // スムーズスクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = 120; // ヘッダー + 注意書きの高さ
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // カード要素のホバー効果
+        document.querySelectorAll('.service-card, .contact-method').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            });
+        });
+
+        // 数字カウントアップ効果
+        function animateNumbers() {
+            const badges = document.querySelectorAll('.badge-number');
+            
+            badges.forEach(badge => {
+                const target = badge.textContent.includes('+') ? 
+                    parseInt(badge.textContent.replace('+', '')) : 
+                    parseInt(badge.textContent);
+                
+                if (isNaN(target)) return;
+                
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        badge.textContent = target + (badge.textContent.includes('+') ? '+' : '');
+                        clearInterval(timer);
+                    } else {
+                        badge.textContent = Math.floor(current) + (badge.textContent.includes('+') ? '+' : '');
+                    }
+                }, 30);
+            });
+        }
+
+        // ページ読み込み完了時に数字アニメーション実行
+        window.addEventListener('load', function() {
+            setTimeout(animateNumbers, 1000);
+        });
+    </script>
+</body>
+</html>
